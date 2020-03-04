@@ -17,7 +17,7 @@ gem install nokogiri -v 1.10.9
 ## Usage
 Run following commands
 ```bash
-https://github.com/NikitaShmelev/ruby_task.git
+git clone https://github.com/NikitaShmelev/ruby_task.git
 cd ruby_task
 main.rb
 ```
