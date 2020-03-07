@@ -18,12 +18,24 @@ links_on_pages.push(links)
 i = 2
 
 until links.empty?
+<<<<<<< HEAD
 
   if url.include?('/?p=') && url[-1] != '/'
     url = url[0, url.length - 1] + (url[-1].to_i + (2 - 1)).to_s
   elsif !url.include?('/?p=') && url[-1] == '/' 
     url = url + '/?p=' + i.to_s
   else
+=======
+  # puts url
+  if url.include?('/?p=') && url[-1] != '/'
+    url = url[0, url.length - 1] + (url[-1].to_i + (2 - 1)).to_s
+  elsif url[-1] == '/'
+    url = url + '?p=' + i.to_s
+  elsif !url.include?('/?p=') && url[-1] != '/'
+    doc = Nokogiri::HTML(Curl.get(url).body_str)
+    links = doc.search('div.pro_outer_box a.product-name').map { |link| link['href'] }
+    links_on_pages.push(links)
+>>>>>>> f4bafd2da5057b45b87eb0fea65c3487e619234f
     break 
   end
 
@@ -40,7 +52,11 @@ CSV.open("#{csv_name}.csv", 'wb') do |csv|
 
   csv << %w[Name Price Image]
 
+<<<<<<< HEAD
   links_on_pages.each_with_index do |links, item_index|
+=======
+  links_on_pages[0, links_on_pages.length - 1].each_with_index do |links, item_index|
+>>>>>>> f4bafd2da5057b45b87eb0fea65c3487e619234f
     
     puts "Searching on page №#{item_index + 1}"
 
